@@ -8,6 +8,7 @@ const RegisterForm = ({ onSwitchToLogin }) => {
     password: "",
     fullname: "",
     role: "user",
+    confirmPassword: "",
   });
   const [error, setError] = useState("");
 
@@ -18,11 +19,16 @@ const RegisterForm = ({ onSwitchToLogin }) => {
   const handleRegister = async (event) => {
     event.preventDefault();
     setError("");
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
     try {
+      const { confirmPassword, ...submitForm } = form;
       const response = await fetch(REGISTER_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(submitForm),
       });
 
       if (!response.ok) {
@@ -75,6 +81,20 @@ const RegisterForm = ({ onSwitchToLogin }) => {
           id="password"
           name="password"
           value={form.password}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className={style.formGroup}>
+        <label className={style.label} htmlFor="confirmPassword">
+          Confirm Password:
+        </label>
+        <input
+          className={style.input}
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          value={form.confirmPassword}
           onChange={handleChange}
           required
         />
