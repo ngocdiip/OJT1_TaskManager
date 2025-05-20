@@ -1,15 +1,14 @@
-
 .pageContainer {
   display: flex;
-  height: 100vh;
-  width: 100%;
+  min-height: 100dvh;
+  width: 100vw;
   background-color: var(--background-color);
   overflow: hidden;
   position: relative;
 }
 
 .leftSection {
-  flex: 1;
+  flex: 2;
   background-image: url("https://cdn.thuvienphapluat.vn/uploads/tintuc/2024/01/06/game-tai-xiu.png");
   background-size: cover;
   background-position: center;
