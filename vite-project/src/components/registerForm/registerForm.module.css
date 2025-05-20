@@ -1,8 +1,8 @@
 .formContainer {
   max-width: 350px;
   margin: 40px auto;
-  padding: 32px 24px;
-  background: var(--background-color);
+  padding: 32px 24px; 
+  background: var(--background-color); 
   border-radius: 10px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
@@ -14,8 +14,8 @@
 .label {
   display: block;
   margin-bottom: 6px;
-  font-weight: 500;
-  color: var(--text-color);
+  font-weight: 500; 
+  color: var(--text-color); 
 }
 
 .input {
@@ -36,8 +36,8 @@
 
 .button {
   width: 100%;
-  padding: 10px 0;
-  background: var(--primary-color);
+  padding: 10px 0; 
+  background: var(--primary-color); 
   color: #fff;
   border: none;
   border-radius: 5px;

@@ -1,13 +1,34 @@
+import { getAuthToken } from './utils/auth';
 export const HTTP_METHODS = {
   GET: "GET",
   POST: "POST",
   PUT: "PUT",
   DELETE: "DELETE",
 };
+
 const BASE_URL = "http://localhost:3001";
 export const BASE_API_URL = BASE_URL;
 
-//Auth
+// Hàm tiện ích tạo header kèm Authorization
+export const getAuthHeaders = () => {
+  const token = getAuthToken();
+  return {
+    'Content-Type': 'application/json',
+    ...(token && { 'Authorization': `Bearer ${token}` }),
+  };
+};
+
+// Hàm fetchWithAuth để gọi fetch kèm token
+export const fetchWithAuth = (url, options = {}) => {
+  const headers = {
+    ...getAuthHeaders(),
+    ...options.headers,
+    
+  };
+  return fetch(url, { ...options, headers, credentials: 'include' });
+};
+
+// Các URL API
 export const LOGIN_API = `${BASE_URL}/login`;
 export const REGISTER_API = `${BASE_URL}/register`;
 export const LOGOUT_API = `${BASE_URL}/logout`;
