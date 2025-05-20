@@ -7,6 +7,7 @@ const RegisterForm = ({ onSwitchToLogin }) => {
     username: "",
     password: "",
     fullname: "",
+    role: "user",
   });
   const [error, setError] = useState("");
 
