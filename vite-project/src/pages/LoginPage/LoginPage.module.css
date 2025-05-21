@@ -1,30 +1,84 @@
-.loginPage {
-  min-height: 100vh;
+.pageContainer {
   display: flex;
-  flex-direction: column;
+  min-height: 100dvh;
+  width: 100vw;
+  background-color: var(--background-color);
+  overflow: hidden;
+  position: relative;
+}
+
+.leftSection {
+  flex: 2;
+  background-image: url("https://cdn.thuvienphapluat.vn/uploads/tintuc/2024/01/06/game-tai-xiu.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.rightSection {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f7fa;
+  background-color: var(--background-color);
+  position: relative;
+  overflow: hidden;
 }
 
-.title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 24px;
-  color: #222;
+.formContainer {
+  width: 70%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+  position: relative;
 }
 
-.switchText {
-  margin-bottom: 16px;
+.slideRight {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slideLeft {
+  transform: translateX(-30px);
+  opacity: 1;
+}
+
+.formTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.formWrapper {
+  width: 100%;
+}
+
+.formSwitcher {
+  margin-top: 1.5rem;
   text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary-color);
+}
+
+.switchOption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .switchButton {
   background: none;
   border: none;
-  color: #007bff;
+  color: var(--primary-color);
   cursor: pointer;
-  text-decoration: underline;
+  font-weight: 500;
+  text-decoration: none;
   padding: 0;
   font: inherit;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
 }
