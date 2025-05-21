@@ -12,6 +12,7 @@ export const BASE_API_URL = BASE_URL;
 // Hàm tiện ích tạo header kèm Authorization
 export const getAuthHeaders = () => {
   const token = getAuthToken();
+  console.log("Token gửi lên API:", token); // Thêm dòng này để debugS
   return {
     'Content-Type': 'application/json',
     ...(token && { 'Authorization': `Bearer ${token}` }),

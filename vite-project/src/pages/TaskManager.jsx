@@ -28,13 +28,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import {
   GET_TASKS_API,
+  GET_USERS_API,
   fetchWithAuth,
 } from "../config/api";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-const memberOptions = ["Alice", "Bob", "Charlie", "David"];
+
 
 const TaskTable = () => {
   const navigate = useNavigate();
@@ -43,10 +44,24 @@ const TaskTable = () => {
   const [filteredStatus, setFilteredStatus] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
+  const [memberOptions, setMemberOptions] = useState([]);
 
   useEffect(() => {
     fetchTasks();
+    fetchMembers();
   }, []);
+
+  const fetchMembers = async () => {
+    try {
+      const response = await fetchWithAuth(GET_USERS_API);
+      const data = await response.json();
+      if (!response.ok) throw new Error("Lỗi khi tải users");
+      // Giả sử API trả về mảng user có trường 'name'
+      setMemberOptions(data.map(user => ({ key: user._id, label: user.fullname })));
+    } catch (error) {
+      setMemberOptions([]);
+    }
+  };
 
   const fetchTasks = async () => {
     try {
@@ -157,16 +172,16 @@ const TaskTable = () => {
       key: "assignedTo",
       render: (text, record) => (
         <Select
-          mode="multiple"
-          style={{ width: "100%" }}
-          placeholder="Chọn thành viên"
-          value={Array.isArray(record.assignedTo) ? record.assignedTo : [record.assignedTo]}
-          onChange={(value) => handleMemberChange(value, record)}
-        >
-          {memberOptions.map((member) => (
-            <Option key={member} value={member}>{member}</Option>
-          ))}
-        </Select>
+  mode="multiple"
+  style={{ width: "100%" }}
+  placeholder="Chọn thành viên"
+  value={Array.isArray(record.assignedTo) ? record.assignedTo : [record.assignedTo]}
+  onChange={(value) => handleMemberChange(value, record)}
+>
+  {[...new Set(memberOptions.filter(Boolean))].map((member) => (
+    <Option key={member.key} value={member.label}>{member.label}</Option>
+  ))}
+</Select>
       ),
     },
     {
@@ -181,9 +196,9 @@ const TaskTable = () => {
           <Dropdown
             overlay={
               <Menu>
-                <Menu.Item onClick={() => handleUpdateStatus(record._id, "todo")}>Chưa bắt đầu</Menu.Item>
-                <Menu.Item onClick={() => handleUpdateStatus(record._id, "in progress")}>Đang thực hiện</Menu.Item>
-                <Menu.Item onClick={() => handleUpdateStatus(record._id, "done")}>Đã hoàn thành</Menu.Item>
+                <Menu.Item onClick={() => handleUpdateStatus(record._id, "todo")}>To Do</Menu.Item>
+                <Menu.Item onClick={() => handleUpdateStatus(record._id, "in progress")}>In Progress </Menu.Item>
+                <Menu.Item onClick={() => handleUpdateStatus(record._id, "done")}> Done </Menu.Item>
               </Menu>
             }
           >
