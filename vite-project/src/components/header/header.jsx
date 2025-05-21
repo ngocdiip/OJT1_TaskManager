@@ -10,13 +10,13 @@ const Header = () => {
         <Link className={style.link} to="/login">
           Login
         </Link>
-        <Link className={style.link} to="/tasks">
+        <Link className={style.link} to="/task">
           Tasks
         </Link>
         <Link className={style.link} to="/assign">
           Assign
         </Link>
-        <Link className={style.link} to="/user">
+        <Link className={style.link} to="/users">
           User
         </Link>
       </nav>
